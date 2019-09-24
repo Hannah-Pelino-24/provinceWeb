@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+      title=shortName
+      style
+        include style.css
+
+      script(src="/assets/jquery.min.js")
+      script(src="/assets/script.js")
+
+  body
+        center
+           h1#title=name
+center
+.row
+  .column
+    img(src=image_1)
+  .column
+    img(src=image_2)
+  .column
+    img(src=image_3)
+div#lawas
+    p='Major Island Group: ' + group
+    p='Population: ' + population
+    p Delicacies: 
+      ul
+        li=delicacies[0]
+        li=delicacies[1]
+        li=delicacies[2]
+    p='History: ' + history
+    p Average Rating: 
+      span#rate=averageRate
+    p Rate Province: 
+      button#1 1
+      button#2 2
+      button#3 3
+      button#4 4
+      button#5 5
