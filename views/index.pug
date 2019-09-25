@@ -21,12 +21,14 @@ center
     img(src=image_3).img
 div#lawas
     p='Major Island Group: ' + group
-    p='Population: ' + population
-    p Delicacies: 
-      ul
-        li=delicacies[0]
-        li=delicacies[1]
-        li=delicacies[2]
+    p#imagePopulation='Population: ' + population
+    
+    div#delicacy
+      p#delicacyTitle Delicacies: 
+        ul
+          li=delicacies[0]
+          li=delicacies[1]
+          li=delicacies[2]
     p='History: ' + history
     p Average Rating: 
       span#rate=averageRate

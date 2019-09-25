@@ -23,29 +23,27 @@ app.get('/provinces/:provinceName', (req, res) => {
 })
 
 app.get('/rate', (req, res) => {
-    console.log(req.query)
+
     var id = req.query.id;
     var province = req.query.province;
     var data = JSON.parse(readJSON.readJSON(province));
-    data.ratings.push(Number(id))
-    var sum = 0;
-
-    if (data.ratings.length == 3) {
-        data.ratings.splice(0, 1)
-        data.ratings.forEach(rating => {
-            sum += Number(rating)
-        });
-    }else{
-        data.ratings.forEach(rating => {
-            sum += Number(rating)
-        });
-    }
-    data.averageRate = sum / 2
+    // data.ratings.push(Number(id))
+    // var sum = 0;
+    // if (data.ratings.length == 3) {
+    //     data.ratings.splice(0, 1)
+    //     data.ratings.forEach(rating => {
+    //         sum += Number(rating)
+    //     });
+    // }else{
+    //     data.ratings.forEach(rating => {
+    //         sum += Number(rating)
+    //     });
+    // }
+    var average =Number(data.averageRate)+ Number(id)
+    data.averageRate =average;
+    data.averageRate = Number(data.averageRate /2).toFixed(2)
     updateJSON.updateJSON(province, data)
     res.end("" + data.averageRate)
-})
-app.get('/*', (req, res) => {
-    res.render('404')
 })
 
 app.listen(8080, function () {
