@@ -1,7 +1,6 @@
 const path = require('path')
 const express = require('express')
 const app = express()
-const fs = require('fs')
 var numRequest = require('./numRequest')
 var readJSON = require('./readJSON')
 var updateJSON = require('./updateJSON')
@@ -9,7 +8,6 @@ var updateJSON = require('./updateJSON')
 app.set('view engine', 'pug')
 
 app.use(function (req, res, next) {
-    console.log('url', req.originalUrl)
     numRequest.numRequest(req, res, req.originalUrl);
     next();
 })
@@ -25,18 +23,29 @@ app.get('/provinces/:provinceName', (req, res) => {
 })
 
 app.get('/rate', (req, res) => {
+    console.log(req.query)
     var id = req.query.id;
     var province = req.query.province;
     var data = JSON.parse(readJSON.readJSON(province));
     data.ratings.push(Number(id))
     var sum = 0;
-    data.ratings.forEach(rating => {
-        sum += Number(rating)
-    });
+
+    if (data.ratings.length == 3) {
+        data.ratings.splice(0, 1)
+        data.ratings.forEach(rating => {
+            sum += Number(rating)
+        });
+    }else{
+        data.ratings.forEach(rating => {
+            sum += Number(rating)
+        });
+    }
     data.averageRate = sum / 2
-    console.log(data.averageRate)
     updateJSON.updateJSON(province, data)
     res.end("" + data.averageRate)
+})
+app.get('/*', (req, res) => {
+    res.render('404')
 })
 
 app.listen(8080, function () {
