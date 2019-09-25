@@ -8,7 +8,6 @@ $('document').ready(function () {
                 $('#rate').text(data)
             },
             error: function (e) {
-
             }
         })
     })
