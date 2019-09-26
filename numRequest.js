@@ -8,8 +8,7 @@ exports.numRequest = function (req, res, url) {
                 if (err) console.log(err);
                 var dataText = data.toString();
                 var splittedData = dataText.split(",");
-                 
-                // console.log(splittedData);
+                
                 fs.writeFile('request.txt', splittedData.length-1, function (err) {
                     if (err) console.log(err);
                 })
