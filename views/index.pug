@@ -5,20 +5,17 @@ html
       style
         include style.css
 
+      link(src="/assets/bootstrap.min.css")
       script(src="/assets/jquery.min.js")
       script(src="/assets/script.js")
-
   body
         center
            h1#title=name
+
 center
-.row
-  .column
-    img(src=image_1).img
-  .column
-    img(src=image_2).img
-  .column
-    img(src=image_3).img
+  img(src=image_1 style="width: 80%")
+  img(src=image_2 style="width: 40%").half
+  img(src=image_3 style="width: 40%").half
 div#lawas
     p='Major Island Group: ' + group
     p#imagePopulation='Population: ' + population

@@ -23,16 +23,22 @@ app.get('/provinces/:provinceName', (req, res) => {
 })
 
 app.get('/rate', (req, res) => {
-
     var id = req.query.id;
     var province = req.query.province;
+    console.log(req.query)
     var data = JSON.parse(readJSON.readJSON(province));
-
-    var average =Number(data.averageRate)+ Number(id)
-    data.averageRate =average;
-    data.averageRate = Number(data.averageRate /2).toFixed(1)
-    updateJSON.updateJSON(province, data)
-    res.end("" + data.averageRate)
+    var average = Number(data.averageRate) + Number(id)
+    if (data.averageRate == 0) {
+        data.averageRate = average;
+        data.averageRate = Number(Number(data.averageRate).toFixed(1))
+        updateJSON.updateJSON(province, data)
+        res.end((data.averageRate).toString())
+    } else {
+        data.averageRate = average;
+        data.averageRate = Number(Number(data.averageRate / 2).toFixed(1))
+        updateJSON.updateJSON(province, data)
+        res.end((data.averageRate).toString())
+    }
 })
 
 app.listen(8080, function () {

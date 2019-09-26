@@ -6,6 +6,7 @@ $('document').ready(function () {
             data: { id: id, province: $('title').text() },
             success: function (data) {
                 $('#rate').text(data)
+                console.log(data)
             },
             error: function (e) {
             }
